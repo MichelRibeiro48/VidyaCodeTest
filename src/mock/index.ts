@@ -1,0 +1,58 @@
+export const mockData = [
+  {
+    id: 1,
+    name: 'imperio dos sonhos',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'IS',
+  },
+  {
+    id: 2,
+    name: 'Energia Verde',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'EV',
+  },
+  {
+    id: 3,
+    name: 'ConectaTech',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'C',
+  },
+  {
+    id: 4,
+    name: 'Sabor Tropical',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'ST',
+  },
+  {
+    id: 5,
+    name: 'Arte Viva',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'AV',
+  },
+  {
+    id: 6,
+    name: 'Construções Futuras',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'CF',
+  },
+  {
+    id: 7,
+    name: 'Planeta Orgânico',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'PO',
+  },
+  {
+    id: 8,
+    name: 'Pioneira Digital',
+    qtdProduct: 123,
+    total: 49.9,
+    thumbnail: 'PD',
+  },
+];

@@ -13,6 +13,9 @@ export default function Routes() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
+          headerStyle: {
+            height: 80,
+          },
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontFamily: 'Inter',
@@ -35,7 +38,7 @@ export default function Routes() {
             tabBarIcon: ({focused}) => (
               <Ionicons
                 name="bag"
-                size={24}
+                size={20}
                 color={focused ? '#006FFD' : '#D4D6DD'}
               />
             ),
@@ -54,7 +57,7 @@ export default function Routes() {
             tabBarIcon: ({focused}) => (
               <FontAwesome
                 name="user"
-                size={24}
+                size={20}
                 color={focused ? '#006FFD' : '#D4D6DD'}
               />
             ),
@@ -73,7 +76,7 @@ export default function Routes() {
             tabBarIcon: ({focused}) => (
               <FontAwesome6
                 name="shop"
-                size={24}
+                size={20}
                 color={focused ? '#006FFD' : '#D4D6DD'}
               />
             ),

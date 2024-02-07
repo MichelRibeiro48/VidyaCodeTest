@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import {Text} from 'react-native';
+import Input from '../../components/Input';
+
 import {MainPage} from './styles';
+import SearchList from '../../components/SearchList';
+import {mockData} from '../../mock';
 
 export default function OrderPage() {
+  const [search, setSearch] = useState('');
+  console.log(search);
   return (
     <MainPage>
-      <Text>Teste</Text>
+      <Input value={search} onChangeText={value => setSearch(value)} />
+      <SearchList data={mockData} input={search} />
     </MainPage>
   );
 }
