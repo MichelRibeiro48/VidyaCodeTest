@@ -9,7 +9,12 @@ export default function ClientPage() {
   return (
     <MainPage>
       <Input value={search} onChangeText={value => setSearch(value)} />
-      <SearchList data={mockData} input={search} clientPage />
+      <SearchList
+        data={mockData}
+        input={search}
+        clientPage
+        route={'ClientDescription'}
+      />
     </MainPage>
   );
 }

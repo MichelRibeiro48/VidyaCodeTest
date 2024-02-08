@@ -9,7 +9,7 @@ export const Card = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
-export const Thumbnail = styled.View<{ color: string }>`
+export const Thumbnail = styled.View<{color: string}>`
   width: 40px;
   height: 40px;
   background-color: ${props => props.color};

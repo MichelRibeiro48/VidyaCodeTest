@@ -17,7 +17,12 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RoutesT} from '../../routes/types/RoutesT';
 import {colors} from '../../mock/colors';
 
-export default function SearchList({data, input, clientPage}: SearchListT) {
+export default function SearchList({
+  data,
+  input,
+  clientPage,
+  route,
+}: SearchListT) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   return (
     <FlatList
@@ -26,7 +31,7 @@ export default function SearchList({data, input, clientPage}: SearchListT) {
       showsVerticalScrollIndicator={false}
       renderItem={({item, index}) =>
         item.name.toLowerCase().includes(input.toLowerCase()) && (
-          <Card onPress={() => navigation.navigate('OrderRegister')}>
+          <Card onPress={() => navigation.navigate(route)}>
             <BoxThumbClient>
               <Thumbnail color={colors[index]}>
                 <ThumbnailText>{item.thumbnail}</ThumbnailText>

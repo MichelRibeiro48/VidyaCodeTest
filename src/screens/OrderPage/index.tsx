@@ -11,7 +11,7 @@ export default function OrderPage() {
   return (
     <MainPage>
       <Input value={search} onChangeText={value => setSearch(value)} />
-      <SearchList data={mockData} input={search} />
+      <SearchList data={mockData} input={search} route={'OrderRegister'} />
     </MainPage>
   );
 }
