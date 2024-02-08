@@ -12,7 +12,7 @@ export const BoxInfoView = styled.View`
 export const TitleInfoText = styled.Text<{initialInfo?: boolean}>`
   font-family: 'Inter-Bold';
   color: #2f3036;
-  margin-top: ${props => (props.initialInfo ? 0 : 16)};
+  margin-top: ${props => (props.initialInfo ? 0 : 16)}px;
 `;
 
 export const ValueInfoText = styled.Text`
