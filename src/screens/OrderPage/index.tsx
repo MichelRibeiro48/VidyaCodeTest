@@ -8,7 +8,6 @@ import {mockData} from '../../mock';
 
 export default function OrderPage() {
   const [search, setSearch] = useState('');
-  console.log(search);
   return (
     <MainPage>
       <Input value={search} onChangeText={value => setSearch(value)} />
