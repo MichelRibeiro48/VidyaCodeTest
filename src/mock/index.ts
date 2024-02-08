@@ -5,6 +5,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'IS',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'EV',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'C',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'ST',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'AV',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 6,
@@ -40,6 +45,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'CF',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 7,
@@ -47,6 +53,7 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'PO',
+    CNPJ: '00.000.000/0000-00',
   },
   {
     id: 8,
@@ -54,5 +61,6 @@ export const mockData = [
     qtdProduct: 123,
     total: 49.9,
     thumbnail: 'PD',
+    CNPJ: '00.000.000/0000-00',
   },
 ];

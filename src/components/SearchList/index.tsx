@@ -15,33 +15,35 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RoutesT} from '../../routes/types/RoutesT';
+import {colors} from '../../mock/colors';
 
-export default function SearchList({data, input}: SearchListT) {
+export default function SearchList({data, input, clientPage}: SearchListT) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   return (
     <FlatList
       data={data}
       keyExtractor={item => item.id}
       showsVerticalScrollIndicator={false}
-      renderItem={({item}) =>
+      renderItem={({item, index}) =>
         item.name.toLowerCase().includes(input.toLowerCase()) && (
           <Card onPress={() => navigation.navigate('OrderRegister')}>
             <BoxThumbClient>
-              <Thumbnail>
+              <Thumbnail color={colors[index]}>
                 <ThumbnailText>{item.thumbnail}</ThumbnailText>
               </Thumbnail>
               <BoxClientView>
                 <ClientText>{item.name}</ClientText>
                 <QtdProductText>
-                  Qtd. produtos: {item.qtdProduct}
+                  {clientPage ? item.CNPJ : `Qtd. produtos: ${item.qtdProduct}`}
                 </QtdProductText>
               </BoxClientView>
             </BoxThumbClient>
             <CurrencyProductText>
-              {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(item.total)}
+              {!clientPage &&
+                new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(item.total)}
             </CurrencyProductText>
           </Card>
         )

@@ -30,7 +30,7 @@ export default function TabRoutes() {
         },
       }}>
       <Tab.Screen
-        name="Order"
+        name="Pedidos"
         component={OrderPage}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
@@ -49,7 +49,7 @@ export default function TabRoutes() {
         }}
       />
       <Tab.Screen
-        name="Client"
+        name="Clientes"
         component={ClientPage}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
@@ -68,7 +68,7 @@ export default function TabRoutes() {
         }}
       />
       <Tab.Screen
-        name="Products"
+        name="Produtos"
         component={ProductsPage}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
