@@ -10,7 +10,7 @@ export default function OrderPage() {
   const [search, setSearch] = useState('');
   return (
     <MainPage>
-      <Input value={search} onChangeText={value => setSearch(value)} />
+      <Input value={search} onChangeText={value => setSearch(value)} icon />
       <SearchList data={mockData} input={search} route={'OrderRegister'} />
     </MainPage>
   );

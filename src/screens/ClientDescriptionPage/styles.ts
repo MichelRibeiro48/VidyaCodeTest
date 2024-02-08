@@ -5,18 +5,6 @@ export const MainPage = styled.View`
   padding: 24px;
 `;
 
-export const BackButton = styled.TouchableOpacity``;
-export const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const HeaderText = styled.Text`
-  padding-left: 100px;
-  font-family: 'Inter-ExtraBold';
-  color: #1f2024;
-`;
-
 export const BoxInfoView = styled.View`
   margin-top: 33px;
 `;

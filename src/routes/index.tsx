@@ -6,6 +6,7 @@ import TabRoutes from './TabRoutes';
 import OrderRegister from '../screens/OrderRegister';
 import {NavigationContainer} from '@react-navigation/native';
 import ClientDescriptionPage from '../screens/ClientDescriptionPage';
+import ClientRegisterPage from '../screens/ClientRegisterPage';
 
 export default function OrderStackRoute() {
   const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ export default function OrderStackRoute() {
           name="ClientDescription"
           component={ClientDescriptionPage}
         />
+        <Stack.Screen name="ClientRegister" component={ClientRegisterPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
