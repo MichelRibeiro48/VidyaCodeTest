@@ -3,4 +3,6 @@ export interface ButtonT {
   onPress: () => void;
   marginTop?: number;
   paddingBottom?: number;
+  size: 'small' | 'large';
+  icon?: string;
 }

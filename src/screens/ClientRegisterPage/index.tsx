@@ -5,7 +5,7 @@ import {useForm} from 'react-hook-form';
 import Button from '../../components/Button';
 import InputForm from '../../components/InputForm';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {ValidationSchema} from './validations/yup';
+import {ValidationClientSchema} from '../../validations/yup';
 import {getAddressByCep, getUFBrazil} from '../../api';
 import {cepInfoT} from '../../types/cepInfoT';
 import {CNPJRegex, cepRegex, phoneRegex} from '../../helpers/Regex';
@@ -28,7 +28,7 @@ export default function ClientRegisterPage() {
     handleSubmit,
     reset,
     formState: {errors},
-  } = useForm({resolver: yupResolver(ValidationSchema)});
+  } = useForm({resolver: yupResolver(ValidationClientSchema)});
 
   const onSubmit = async () => {
     console.log('Tudo certo');
@@ -159,6 +159,7 @@ export default function ClientRegisterPage() {
             title="Salvar"
             onPress={handleSubmit(onSubmit)}
             marginTop={24}
+            size="large"
           />
         </ButtonView>
       </FormView>

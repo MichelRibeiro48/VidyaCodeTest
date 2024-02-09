@@ -8,6 +8,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import ClientDescriptionPage from '../screens/ClientDescriptionPage';
 import ClientRegisterPage from '../screens/ClientRegisterPage';
 import OrderSelectClientPage from '../screens/OrderSelectClientPage';
+import ProductsRegisterPage from '../screens/ProductsRegisterPage';
 
 export default function OrderStackRoute() {
   const Stack = createNativeStackNavigator();
@@ -24,6 +25,10 @@ export default function OrderStackRoute() {
         <Stack.Screen
           name="OrderSelectClientPage"
           component={OrderSelectClientPage}
+        />
+        <Stack.Screen
+          name="ProductsRegisterPage"
+          component={ProductsRegisterPage}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -2,9 +2,11 @@ import styled from 'styled-components/native';
 
 export const BoxButton = styled.TouchableOpacity<{
   marginTop?: number;
+  size: string;
 }>`
-  width: 100%;
-  height: 48px;
+  flex-direction: row;
+  width: ${props => (props.size === 'small' ? 183 : 375)}px;
+  height: ${props => (props.size === 'small' ? 29 : 48)}px;
   border-radius: 12px;
   background-color: #006ffd;
   align-items: center;
@@ -12,6 +14,8 @@ export const BoxButton = styled.TouchableOpacity<{
   margin-top: ${props => props.marginTop}px;
 `;
 
-export const ButtonText = styled.Text`
+export const ButtonText = styled.Text<{ icon?: boolean | undefined }>`
   color: white;
+  margin-left: ${props => props.icon && 8}px;
+  font-size: 12px;
 `;

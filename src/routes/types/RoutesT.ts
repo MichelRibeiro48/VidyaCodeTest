@@ -7,4 +7,5 @@ export type RoutesT = {
   OrderRegister: undefined;
   ClientRegister: undefined;
   OrderSelectClientPage: undefined;
+  ProductsRegisterPage: undefined;
 };

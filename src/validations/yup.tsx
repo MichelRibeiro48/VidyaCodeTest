@@ -2,7 +2,7 @@
 import {useValidationsBR} from 'validations-br';
 import * as yup from 'yup';
 
-export const ValidationSchema = yup.object().shape({
+export const ValidationClientSchema = yup.object().shape({
   name: yup.string().required('Necessário preencher o nome'),
   CNPJ: yup
     .string()
@@ -36,4 +36,10 @@ export const ValidationSchema = yup.object().shape({
   district: yup.string().required('Necessário Preencher o Bairro'),
   address: yup.string().required('Necessário Preencher o Endereço'),
   number: yup.string().required('Necessário Preencher o Numero'),
+});
+
+export const ValidationProductSchema = yup.object().shape({
+  name: yup.string().required('Necessário preencher o nome'),
+  price: yup.string().required('Necessário preencher o preço'),
+  description: yup.string().required('Necessário preencher o preço'),
 });

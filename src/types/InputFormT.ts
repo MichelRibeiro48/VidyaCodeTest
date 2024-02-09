@@ -9,4 +9,5 @@ export interface InputFormT {
   focus: boolean;
   onPressOut?: () => void;
   mask?: Mask;
+  isDescription?: boolean;
 }
