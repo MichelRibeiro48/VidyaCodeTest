@@ -1,11 +1,13 @@
 export type RoutesT = {
   Home: {
-    Order: undefined;
-    Client: undefined;
-    Products: undefined;
+    Pedidos: any;
+    Clientes: any;
+    Produtos: any;
   };
-  OrderRegister: undefined;
-  ClientRegister: undefined;
-  OrderSelectClientPage: undefined;
-  ProductsRegisterPage: undefined;
+  OrderRegister: any;
+  ClientRegister: any;
+  OrderSelectClientPage: any;
+  ProductsRegisterPage: any;
+  ProductDetails: any;
+  Produtos: any;
 };

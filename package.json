@@ -30,6 +30,7 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^10.0.3",
+    "react-redux": "^9.1.0",
     "realm": "^12.6.0",
     "styled-components": "^6.1.8",
     "validations-br": "^1.4.0",

@@ -34,6 +34,7 @@ import {RoutesT} from '../../routes/types/RoutesT';
 export default function ProductsRegisterPage() {
   const [focusInput, setFocusInput] = useState('');
   const [imageUri, setImageUri] = useState('');
+  const [updatePage, setUpdatePage] = useState(false);
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const {
     control,
@@ -69,8 +70,8 @@ export default function ProductsRegisterPage() {
         });
         console.log(created);
       });
-
-      navigation.goBack();
+      setUpdatePage(!updatePage);
+      navigation.navigate('Produtos', {updatePage});
     } catch (e) {
       console.log(e);
     } finally {

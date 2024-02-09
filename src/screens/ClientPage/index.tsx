@@ -23,6 +23,7 @@ export default function ClientPage() {
       <Button
         title="Novo cliente"
         onPress={() => navigation.navigate('ClientRegister')}
+        size="large"
       />
     </MainPage>
   );

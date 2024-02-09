@@ -4,4 +4,5 @@ export interface InputT {
   icon?: boolean;
   control?: any;
   name?: string;
+  marginBottom?: number | undefined;
 }

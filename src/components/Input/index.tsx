@@ -5,9 +5,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {BoxInput, InputArea} from './styles';
 import {InputT} from '../../types/InputT';
 
-export default function Input({value, onChangeText}: InputT) {
+export default function Input({value, onChangeText, marginBottom}: InputT) {
   return (
-    <BoxInput>
+    <BoxInput marginBottom={marginBottom}>
       <AntDesign name="search1" size={16} />
       <InputArea
         placeholder="Pesquisar"
