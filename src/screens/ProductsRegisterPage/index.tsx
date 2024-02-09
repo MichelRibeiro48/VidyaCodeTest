@@ -1,6 +1,24 @@
 import React, {useState} from 'react';
 
 import {
+  ImageLibraryOptions,
+  launchImageLibrary,
+} from 'react-native-image-picker';
+import {Masks} from 'react-native-mask-input';
+import uuid from 'react-native-uuid';
+
+import {useForm} from 'react-hook-form';
+
+import Button from '../../components/Button';
+import Header from '../../components/Header';
+import InputForm from '../../components/InputForm';
+
+import {yupResolver} from '@hookform/resolvers/yup';
+import {ValidationProductSchema} from '../../validations/yup';
+
+import {getRealm} from '../../databases/realm';
+
+import {
   DottedView,
   ImageButton,
   ImageProduct,
@@ -8,30 +26,21 @@ import {
   PickerPhotoDescription,
   PickerPhotoTitle,
 } from './styles';
-import Header from '../../components/Header';
-import InputForm from '../../components/InputForm';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {ValidationProductSchema} from '../../validations/yup';
-import {useForm} from 'react-hook-form';
-import Button from '../../components/Button';
-import {Masks} from 'react-native-mask-input';
-import {
-  ImageLibraryOptions,
-  launchImageLibrary,
-} from 'react-native-image-picker';
+
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RoutesT} from '../../routes/types/RoutesT';
 
 export default function ProductsRegisterPage() {
   const [focusInput, setFocusInput] = useState('');
   const [imageUri, setImageUri] = useState('');
+  const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const {
     control,
     handleSubmit,
+    getValues,
     formState: {errors},
   } = useForm({resolver: yupResolver(ValidationProductSchema)});
-
-  const onSubmit = async () => {
-    console.log('Tudo certo');
-  };
 
   const pickImageFromGallery = async () => {
     const options: ImageLibraryOptions = {
@@ -45,7 +54,29 @@ export default function ProductsRegisterPage() {
       return;
     }
   };
-  console.log(imageUri);
+
+  const handleNewProductRegister = async () => {
+    const realm = await getRealm();
+
+    try {
+      realm.write(() => {
+        const created = realm.create('Product', {
+          _id: uuid.v4(),
+          name: getValues().name,
+          price: getValues().price,
+          description: getValues().description,
+          uriImage: imageUri,
+        });
+        console.log(created);
+      });
+
+      navigation.goBack();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      realm.close();
+    }
+  };
   return (
     <MainPage>
       <Header title="Cadastro de produto" />
@@ -96,7 +127,7 @@ export default function ProductsRegisterPage() {
       </DottedView>
       <Button
         title="Salvar"
-        onPress={handleSubmit(onSubmit)}
+        onPress={handleSubmit(handleNewProductRegister)}
         marginTop={200}
         size="large"
       />
