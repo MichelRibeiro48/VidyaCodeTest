@@ -61,14 +61,13 @@ export default function ProductsRegisterPage() {
 
     try {
       realm.write(() => {
-        const created = realm.create('Product', {
+        realm.create('Product', {
           _id: uuid.v4(),
           name: getValues().name,
           price: getValues().price,
           description: getValues().description,
           uriImage: imageUri,
         });
-        console.log(created);
       });
       setUpdatePage(!updatePage);
       navigation.navigate('Produtos', {updatePage});

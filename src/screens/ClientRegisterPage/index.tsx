@@ -12,10 +12,17 @@ import {CNPJRegex, cepRegex, phoneRegex} from '../../helpers/Regex';
 import {ResponseUFBrazilT} from '../../types/ResponseUFBrazilT';
 import {GetAddressResponseT} from '../../types/GetAddressResponseT';
 import Dropdown from '../../components/Dropdown';
+import uuid from 'react-native-uuid';
+import {getRealm} from '../../databases/realm';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RoutesT} from '../../routes/types/RoutesT';
 
 export default function ClientRegisterPage() {
   const [selectedItem, setSelectedItem] = useState<unknown>('');
   const [focusInput, setFocusInput] = useState('');
+  const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
+  const [updatePage, setUpdatePage] = useState(false);
   const [states, setStates] = useState<string[]>([]);
   const [cepInfo, setCepInfo] = useState<cepInfoT>({
     uf: undefined,
@@ -26,13 +33,10 @@ export default function ClientRegisterPage() {
   const {
     control,
     handleSubmit,
+    getValues,
     reset,
     formState: {errors},
   } = useForm({resolver: yupResolver(ValidationClientSchema)});
-
-  const onSubmit = async () => {
-    console.log('Tudo certo');
-  };
 
   const getAddress = async (cep: string) => {
     try {
@@ -73,6 +77,34 @@ export default function ClientRegisterPage() {
       getResponseUFBrazil();
     }
   }, [states]);
+
+  const handleNewClientRegister = async () => {
+    const realm = await getRealm();
+
+    try {
+      realm.write(() => {
+        realm.create('Client', {
+          _id: uuid.v4(),
+          name: getValues().name,
+          CNPJ: getValues().CNPJ,
+          phone: getValues().phone,
+          cep: getValues().CEP,
+          state: getValues().state,
+          city: getValues().city,
+          district: getValues().district,
+          address: getValues().address,
+          number: getValues().number,
+          colorThumb: '#' + Math.floor(Math.random() * 16777215).toString(16),
+        });
+      });
+      setUpdatePage(!updatePage);
+      navigation.navigate('Clientes', {updatePage});
+    } catch (e) {
+      console.log(e);
+    } finally {
+      realm.close();
+    }
+  };
 
   return (
     <MainPage>
@@ -157,7 +189,7 @@ export default function ClientRegisterPage() {
         <ButtonView>
           <Button
             title="Salvar"
-            onPress={handleSubmit(onSubmit)}
+            onPress={handleSubmit(handleNewClientRegister)}
             marginTop={24}
             size="large"
           />

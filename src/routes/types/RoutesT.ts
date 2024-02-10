@@ -10,4 +10,5 @@ export type RoutesT = {
   ProductsRegisterPage: any;
   ProductDetails: any;
   Produtos: any;
+  Clientes: any;
 };
