@@ -2,28 +2,47 @@ import React from 'react';
 import {BoxInfoView, MainPage, TitleInfoText, ValueInfoText} from './styles';
 import {mockData} from '../../mock';
 import Header from '../../components/Header';
+import {useSelector} from 'react-redux';
 
 export default function ClientDescriptionPage() {
+  const client = useSelector((rootReducer: any) => rootReducer.client);
+  console.log(client.ClientDescriptionInitialState.CNPJ);
   return (
     <MainPage>
       <Header title={mockData[0].name} />
       <BoxInfoView>
         <TitleInfoText initialInfo>CNPJ</TitleInfoText>
-        <ValueInfoText>{mockData[0].CNPJ}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.CNPJ}
+        </ValueInfoText>
         <TitleInfoText>Telefone</TitleInfoText>
-        <ValueInfoText>{mockData[0].phone}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.phone}
+        </ValueInfoText>
         <TitleInfoText>CEP</TitleInfoText>
-        <ValueInfoText>{mockData[0].cep}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.cep}
+        </ValueInfoText>
         <TitleInfoText>Estado</TitleInfoText>
-        <ValueInfoText>{mockData[0].state}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.state}
+        </ValueInfoText>
         <TitleInfoText>Cidade</TitleInfoText>
-        <ValueInfoText>{mockData[0].city}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.city}
+        </ValueInfoText>
         <TitleInfoText>Bairro</TitleInfoText>
-        <ValueInfoText>{mockData[0].district}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.district}
+        </ValueInfoText>
         <TitleInfoText>Endereço</TitleInfoText>
-        <ValueInfoText>{mockData[0].address}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.address}
+        </ValueInfoText>
         <TitleInfoText>Número</TitleInfoText>
-        <ValueInfoText>{mockData[0].number}</ValueInfoText>
+        <ValueInfoText>
+          {client.ClientDescriptionInitialState.number}
+        </ValueInfoText>
       </BoxInfoView>
     </MainPage>
   );
