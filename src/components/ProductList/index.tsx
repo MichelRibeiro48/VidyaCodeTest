@@ -45,7 +45,13 @@ export default function ProductList({data, input, route}: ProductListProp) {
                 description: item?.description,
               });
             }}>
-            <ImageProduct source={{uri: item?.uriImage}} />
+            <ImageProduct
+              source={
+                item?.uriImage
+                  ? {uri: item?.uriImage}
+                  : require('../../assets/images/ImageProduct.png')
+              }
+            />
             <ProductInfoView>
               <ProductTitle>{item?.name}</ProductTitle>
               <ProductValue>{item?.price}</ProductValue>
