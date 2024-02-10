@@ -1,4 +1,4 @@
-import {useValidationsBR} from 'validations-br';
+// import {useValidationsBR} from 'validations-br';
 import * as yup from 'yup';
 
 export const ValidationClientSchema = yup.object().shape({

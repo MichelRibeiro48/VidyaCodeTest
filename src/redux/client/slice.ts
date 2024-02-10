@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { ClientDescriptionInitialState } from './initialState';
+import {createSlice} from '@reduxjs/toolkit';
+import {ClientDescriptionInitialState} from './initialState';
 
 export const clientDescriptionSlice = createSlice({
   name: 'clientDescription',
-  initialState: { ClientDescriptionInitialState },
+  initialState: {ClientDescriptionInitialState},
   reducers: {
     addClientDescription: (state, action) => {
-      state.ClientDescriptionInitialState = { ...action.payload };
+      state.ClientDescriptionInitialState = {...action.payload};
     },
   },
 });
 
-export const { addClientDescription } = clientDescriptionSlice.actions;
+export const {addClientDescription} = clientDescriptionSlice.actions;
