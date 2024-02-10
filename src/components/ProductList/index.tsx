@@ -37,7 +37,7 @@ export default function ProductList({data, input, route}: ProductListProp) {
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
           <CardProduct
             onPress={() => {
-              navigation.navigate('ProductDetails');
+              navigation.navigate(route);
               onPressProduct({
                 name: item?.name,
                 price: item?.price,

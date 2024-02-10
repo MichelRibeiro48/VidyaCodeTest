@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const BoxInput = styled.View<{ marginBottom: number | undefined }>`
+export const BoxInput = styled.View<{marginBottom: number | undefined}>`
   flex-direction: row;
   align-items: center;
   width: 100%;

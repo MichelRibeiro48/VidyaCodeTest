@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { productDetailedInitialState } from './initialState';
+import {createSlice} from '@reduxjs/toolkit';
+import {productDetailedInitialState} from './initialState';
 
 export const productDetailedSlice = createSlice({
   name: 'productDetailed',
-  initialState: { productDetailedInitialState },
+  initialState: {productDetailedInitialState},
   reducers: {
     addProductDetailed: (state, action) => {
-      state.productDetail = { ...action.payload };
+      state.productDetailedInitialState = {...action.payload};
     },
   },
 });
 
-export const { addProductDetailed } = productDetailedSlice.actions;
+export const {addProductDetailed} = productDetailedSlice.actions;
