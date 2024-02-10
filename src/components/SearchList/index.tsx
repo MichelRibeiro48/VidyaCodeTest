@@ -64,18 +64,18 @@ export default function SearchList({
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
           <Card
             onPress={() => {
-              navigation.navigate(route),
-                onPressClient({
-                  name: item?.name,
-                  address: item?.address,
-                  cep: item?.cep,
-                  phone: item?.phone,
-                  city: item?.city,
-                  CNPJ: item?.CNPJ,
-                  district: item?.district,
-                  number: item?.number,
-                  state: item?.state,
-                });
+              navigation.navigate(route);
+              onPressClient({
+                name: item?.name,
+                address: item?.address,
+                cep: item?.cep,
+                phone: item?.phone,
+                city: item?.city,
+                CNPJ: item?.CNPJ,
+                district: item?.district,
+                number: item?.number,
+                state: item?.state,
+              });
             }}>
             <BoxThumbClient>
               <Thumbnail color={colors[index]}>
