@@ -9,14 +9,11 @@ import {getRealm} from '../../databases/realm';
 export default function OrderPage() {
   const [search, setSearch] = useState('');
   const [clients, setClients] = useState({});
-  const [products, setProducts] = useState({});
   const fetchClients = async () => {
     const realm = await getRealm();
     try {
       const responseClient = realm.objects('Client').toJSON();
-      const responseProduct = realm.objects('Product').toJSON();
       setClients(responseClient);
-      setProducts(responseProduct);
     } catch (e) {
       console.log(e);
     } finally {

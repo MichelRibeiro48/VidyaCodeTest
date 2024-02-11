@@ -16,7 +16,7 @@ export const BoxButton = styled.TouchableOpacity<{
   margin-bottom: ${props => props.marginBottom}px;
 `;
 
-export const ButtonText = styled.Text<{ icon?: boolean | undefined }>`
+export const ButtonText = styled.Text<{icon?: boolean | undefined}>`
   color: white;
   margin-left: ${props => props.icon && 8}px;
   font-size: 12px;

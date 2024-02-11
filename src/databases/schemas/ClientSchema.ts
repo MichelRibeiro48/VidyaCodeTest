@@ -1,4 +1,4 @@
-import { ObjectSchema } from 'realm';
+import {ObjectSchema} from 'realm';
 
 export const ProductClientSchema = {
   name: 'ProductClient',
