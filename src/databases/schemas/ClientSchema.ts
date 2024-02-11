@@ -1,5 +1,16 @@
-import {ObjectSchema} from 'realm';
+import { ObjectSchema } from 'realm';
 
+export const ProductClientSchema = {
+  name: 'ProductClient',
+  properties: {
+    _id: 'string',
+    name: 'string',
+    price: 'string',
+    description: 'string',
+    uriImage: 'string',
+  },
+  primaryKey: '_id',
+};
 export const ClientSchema: ObjectSchema = {
   name: 'Client',
   properties: {
@@ -14,5 +25,6 @@ export const ClientSchema: ObjectSchema = {
     address: 'string',
     number: 'string',
     colorThumb: 'string',
+    product: 'ProductClient[]',
   },
 };

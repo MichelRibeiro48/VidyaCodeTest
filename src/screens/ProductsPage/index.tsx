@@ -17,6 +17,7 @@ export default function ProductsPage() {
   const [searchProduct, setSearchProduct] = useState('');
   const [products, setProducts] = useState([{}]);
   const [isLoading, setIsLoading] = useState(false);
+
   const fetchProducts = async () => {
     const realm = await getRealm();
 

@@ -5,4 +5,5 @@ export interface ButtonT {
   paddingBottom?: number;
   size: 'small' | 'large';
   icon?: string;
+  marginBottom?: number;
 }

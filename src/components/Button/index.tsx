@@ -9,9 +9,14 @@ export default function Button({
   marginTop,
   size,
   icon,
+  marginBottom,
 }: ButtonT) {
   return (
-    <BoxButton onPress={onPress} marginTop={marginTop} size={size}>
+    <BoxButton
+      onPress={onPress}
+      marginTop={marginTop}
+      size={size}
+      marginBottom={marginBottom}>
       {icon && <Icon name={icon} size={24} color={'white'} />}
       <ButtonText icon={size === 'small'}>{title}</ButtonText>
     </BoxButton>

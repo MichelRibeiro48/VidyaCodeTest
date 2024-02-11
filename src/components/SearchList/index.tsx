@@ -58,7 +58,7 @@ export default function SearchList({
   return (
     <FlatList
       data={data}
-      keyExtractor={item => item.id}
+      keyExtractor={item => item._id}
       showsVerticalScrollIndicator={false}
       renderItem={({item, index}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
@@ -79,7 +79,7 @@ export default function SearchList({
             }}>
             <BoxThumbClient>
               <Thumbnail color={colors[index]}>
-                <ThumbnailText>{item.thumbnail}</ThumbnailText>
+                <ThumbnailText>{item?.name[0].toUpperCase()}</ThumbnailText>
               </Thumbnail>
               <BoxClientView>
                 <ClientText>{item.name}</ClientText>
