@@ -29,7 +29,13 @@ export default function OrderPage() {
   return (
     <MainPage>
       <Input value={search} onChangeText={value => setSearch(value)} icon />
-      <SearchList data={clients} input={search} route={'OrderRegister'} />
+      <SearchList
+        data={clients}
+        input={search}
+        route={'OrderRegister'}
+        clientPage={false}
+        orderPage={false}
+      />
     </MainPage>
   );
 }

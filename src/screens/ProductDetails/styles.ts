@@ -40,5 +40,5 @@ export const CloseButton = styled.TouchableOpacity`
   position: absolute;
   left: 12px;
   top: 10px;
-  z-index: 1px;
+  z-index: 1;
 `;

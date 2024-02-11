@@ -16,18 +16,21 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RoutesT} from '../../routes/types/RoutesT';
 import {colors} from '../../mock/colors';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ClientListButton} from '../../types/ClientListButton';
 import {addClientDescription} from '../../redux/client/slice';
+import Feather from 'react-native-vector-icons/Feather';
 
 export default function SearchList({
   data,
   input,
   clientPage,
+  orderPage,
   route,
 }: SearchListT) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
+  const client = useSelector((rootReducer: any) => rootReducer.client);
 
   const onPressClient = ({
     name,
@@ -40,7 +43,7 @@ export default function SearchList({
     address,
     number,
   }: ClientListButton) => {
-    const teste = dispatch(
+    dispatch(
       addClientDescription({
         name,
         CNPJ,
@@ -53,7 +56,6 @@ export default function SearchList({
         number,
       }),
     );
-    console.log(teste);
   };
   return (
     <FlatList
@@ -84,16 +86,23 @@ export default function SearchList({
               <BoxClientView>
                 <ClientText>{item.name}</ClientText>
                 <QtdProductText>
-                  {clientPage ? item.CNPJ : `Qtd. produtos: ${item.qtdProduct}`}
+                  {clientPage || orderPage
+                    ? item.CNPJ
+                    : `Qtd. produtos: ${item.qtdProduct}`}
                 </QtdProductText>
               </BoxClientView>
             </BoxThumbClient>
             <CurrencyProductText>
               {!clientPage &&
+                !orderPage &&
                 new Intl.NumberFormat('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
-                }).format(item.total)}
+                }).format(item.total)}{' '}
+              {orderPage &&
+                item.CNPJ === client.ClientDescriptionInitialState?.CNPJ && (
+                  <Feather name="check" size={16} color={'#006FFD'} />
+                )}
             </CurrencyProductText>
           </Card>
         )

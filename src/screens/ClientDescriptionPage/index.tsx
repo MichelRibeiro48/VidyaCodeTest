@@ -6,7 +6,6 @@ import {useSelector} from 'react-redux';
 
 export default function ClientDescriptionPage() {
   const client = useSelector((rootReducer: any) => rootReducer.client);
-  console.log(client.ClientDescriptionInitialState.CNPJ);
   return (
     <MainPage>
       <Header title={mockData[0].name} />

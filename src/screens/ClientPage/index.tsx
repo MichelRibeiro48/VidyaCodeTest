@@ -30,8 +30,6 @@ export default function ClientPage() {
     fetchClients();
   }, [route.params?.updatePage]);
 
-  console.log(clients);
-
   return (
     <MainPage>
       <Input value={search} onChangeText={value => setSearch(value)} />
