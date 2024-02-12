@@ -25,7 +25,6 @@ export const clientDescriptionSlice = createSlice({
       ];
     },
     addProductInSlice(state, action) {
-      console.log(state.ClientDescriptionInitialState);
       const selectedClient = state.ClientDescriptionInitialState.filter(
         client => client.CNPJ === action.payload.newClientProp[0].CNPJ,
       );

@@ -14,8 +14,6 @@ import {ClientListButton} from '../../types/ClientListButton';
 
 import {colors} from '../../mock/colors';
 
-import Feather from 'react-native-vector-icons/Feather';
-
 import {
   BoxClientView,
   BoxThumbClient,
@@ -64,11 +62,10 @@ export default function SearchList({
       }),
     );
   };
-
   return (
     <FlatList
       data={data}
-      keyExtractor={item => item?.id}
+      keyExtractor={item => item?.CNPJ}
       showsVerticalScrollIndicator={false}
       renderItem={({item, index}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
@@ -119,10 +116,6 @@ export default function SearchList({
                     0,
                   ) || 0
                 }`}
-              {orderPage &&
-                item.CNPJ === client.ClientDescriptionInitialState?.CNPJ && (
-                  <Feather name="check" size={16} color={'#006FFD'} />
-                )}
             </CurrencyProductText>
           </Card>
         )

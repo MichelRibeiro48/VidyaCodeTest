@@ -17,9 +17,11 @@ import {MainPage} from './styles';
 export default function OrderSelectClientPage() {
   const [clients, setClients] = useState([{}]);
   const [search, setSearch] = useState('');
+
   const route: RouteProp<{params: {updatePage: boolean}}, 'params'> =
     useRoute();
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
+
   const fetchClients = async () => {
     const realm = await getRealm();
 
