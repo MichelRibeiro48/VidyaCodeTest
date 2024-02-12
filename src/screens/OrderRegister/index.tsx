@@ -28,25 +28,36 @@ import {
 } from './styles';
 import Header from '../../components/Header';
 import Feather from 'react-native-vector-icons/FontAwesome5';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RoutesT} from '../../routes/types/RoutesT';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getRealm} from '../../databases/realm';
 import {FlatList} from 'react-native';
 import Button from '../../components/Button';
 import {ProductQtd} from '../../types/ProductQtd';
 import {OrderRegisterData} from '../../types/OrderRegisterData';
+import {
+  addProductInSlice,
+  decreaseProductQuantity,
+} from '../../redux/client/slice';
 
 export default function OrderRegister() {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
+  const dispatch = useDispatch();
   const client = useSelector((rootReducer: any) => rootReducer.client);
+  const cart = useSelector((rootReducer: any) => rootReducer.cart);
+  const route: RouteProp<{params: {item: any}}, 'params'> = useRoute();
+
+  const newClient = client.ClientDescriptionInitialState.filter(
+    client => client.CNPJ === route.params.item.CNPJ,
+  );
+
+  console.log(client.ClientDescriptionInitialState.cart);
+
   const [productQtd, setProductQtd] = useState<ProductQtd[]>([]);
   const [products, setProducts] = useState<OrderRegisterData[]>([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const onHandlePress = () => {
-    console.log('Teste');
-  };
+
   const fetchProducts = async () => {
     const realm = await getRealm();
     try {
@@ -58,58 +69,11 @@ export default function OrderRegister() {
       realm.close();
     }
   };
-
-  const onHandlePlusPress = (id, price) => {
-    const existingItem = productQtd?.find(item => item.id === id);
-    const newPrice = price.replace('R$ ', '').replace(',', '.');
-
-    if (existingItem) {
-      const updatedCartItems = productQtd.map(item => {
-        if (item.id === id) {
-          setTotalPrice(item.quantity * totalPrice);
-          console.log(totalPrice);
-          return {
-            ...item,
-            quantity: item.quantity + 1,
-            totalPrice: (item.quantity + 1) * Number(newPrice),
-          };
-        }
-
-        return item;
-      });
-
-      setProductQtd(updatedCartItems);
-    } else {
-      setProductQtd([
-        ...productQtd,
-        {id, quantity: 1, totalPrice: Number(newPrice)},
-      ]);
-    }
+  const handleIncrementQuantity = ({product, newClient}) => {
+    dispatch(addProductInSlice({product, newClient}));
   };
-
-  const onHandleMinusPress = (id, price) => {
-    const existingItem = productQtd?.find(item => item.id === id);
-    const newPrice = price.replace('R$ ', '').replace(',', '.');
-
-    if (existingItem) {
-      const updatedCartItems = productQtd.map(item => {
-        if (item.id === id && item.quantity > 0) {
-          return {
-            ...item,
-            quantity: item.quantity - 1,
-            totalPrice: Number(newPrice) * item.quantity - 1,
-          };
-        }
-
-        return item;
-      });
-      setProductQtd(updatedCartItems);
-    } else {
-      setProductQtd([
-        ...productQtd,
-        {id, quantity: 1, totalPrice: Number(newPrice)},
-      ]);
-    }
+  const handleDecrementQuantity = productId => {
+    dispatch(decreaseProductQuantity({productId}));
   };
 
   useEffect(() => {
@@ -125,10 +89,10 @@ export default function OrderRegister() {
           onPress={() => navigation.navigate('OrderSelectClientPage')}>
           <SelectedClientInfoCard>
             <SelectedClientNameCard>
-              {client.ClientDescriptionInitialState.name}
+              {newClient[0]?.name}
             </SelectedClientNameCard>
             <SelectedClientCNPJCard>
-              {client.ClientDescriptionInitialState.CNPJ}
+              {newClient[0]?.CNPJ}
             </SelectedClientCNPJCard>
           </SelectedClientInfoCard>
           <Feather name="check" size={12} color={'#006FFD'} />
@@ -137,7 +101,7 @@ export default function OrderRegister() {
       <ProductListTitle>Produtos</ProductListTitle>
       <FlatList
         data={products}
-        keyExtractor={item => item._id}
+        keyExtractor={item => item.id}
         renderItem={({item, index}) => (
           <>
             <Card>
@@ -147,23 +111,24 @@ export default function OrderRegister() {
                     ? {uri: item?.uriImage}
                     : require('../../assets/images/ImageProduct.png')
                 }
-                style={{}}
               />
               <CardInfo>
                 <CardInfoBox>
                   <CardInfoTitle>{item?.name}</CardInfoTitle>
-                  <CardInfoCod>Cód. {item._id?.substring(0, 5)}</CardInfoCod>
+                  <CardInfoCod>Cód. {item.id?.substring(0, 5)}</CardInfoCod>
                 </CardInfoBox>
                 <CardButtonBox>
                   <ButtonMinus
-                    onPress={() => onHandleMinusPress(item?._id, item?.price)}>
+                    onPress={() => handleDecrementQuantity(item?.id)}>
                     <Icon name="minus" size={10} color={'#006FFD'} />
                   </ButtonMinus>
                   <NumberQtdProductText>
-                    {productQtd[index]?.quantity || 0}
+                    {newClient[0].cart[index]?.quantity || 0}
                   </NumberQtdProductText>
                   <ButtonPlus
-                    onPress={() => onHandlePlusPress(item?._id, item?.price)}>
+                    onPress={() =>
+                      handleIncrementQuantity({product: item, newClient})
+                    }>
                     <Icon name="plus" size={10} color={'#006FFD'} />
                   </ButtonPlus>
                   <ProductPriceText>{item?.price}</ProductPriceText>
@@ -177,14 +142,12 @@ export default function OrderRegister() {
       <TotalInfoBox>
         <TotalInfoView>
           <ProductTotalText>Total</ProductTotalText>
-          <ProductTotalPriceText>
-            R$ {totalPrice.toFixed(2)}
-          </ProductTotalPriceText>
+          <ProductTotalPriceText>R$ 0</ProductTotalPriceText>
         </TotalInfoView>
       </TotalInfoBox>
       <Button
         title="Salvar"
-        onPress={onHandlePress}
+        onPress={() => console.log('teste')}
         size="large"
         marginBottom={24}
       />

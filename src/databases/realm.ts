@@ -6,5 +6,5 @@ export const getRealm = async () =>
   await Realm.open({
     path: 'vidyatest-db',
     schema: [ProductSchema, ClientSchema, ProductClientSchema],
-    schemaVersion: 5,
+    schemaVersion: 7,
   });

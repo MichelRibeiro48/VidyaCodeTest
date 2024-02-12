@@ -1,11 +1,3 @@
-export const ClientDescriptionInitialState = {
-  name: '',
-  CNPJ: '',
-  cep: '',
-  phone: '',
-  state: '',
-  city: '',
-  district: '',
-  address: '',
-  number: '',
-};
+import {ClientListButton} from '../../types/ClientListButton';
+
+export const ClientDescriptionInitialState = [];

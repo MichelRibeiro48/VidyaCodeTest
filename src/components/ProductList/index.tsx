@@ -32,7 +32,7 @@ export default function ProductList({data, input, route}: ProductListProp) {
       data={data}
       numColumns={2}
       showsVerticalScrollIndicator={false}
-      keyExtractor={item => item._id}
+      keyExtractor={item => item.id}
       renderItem={({item}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
           <CardProduct

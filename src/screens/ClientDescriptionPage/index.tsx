@@ -3,12 +3,18 @@ import {BoxInfoView, MainPage, TitleInfoText, ValueInfoText} from './styles';
 import {mockData} from '../../mock';
 import Header from '../../components/Header';
 import {useSelector} from 'react-redux';
+import {clientSelector} from '../../types/clientSelector';
+import {RouteProp, useRoute} from '@react-navigation/native';
 
 export default function ClientDescriptionPage() {
-  const client = useSelector((rootReducer: any) => rootReducer.client);
+  const client = useSelector(
+    (rootReducer: clientSelector) => rootReducer.client,
+  );
+  const route: RouteProp<{params: {CNPJ: string}}, 'params'> = useRoute();
+
   return (
     <MainPage>
-      <Header title={mockData[0].name} />
+      <Header title={client.ClientDescriptionInitialState.name} />
       <BoxInfoView>
         <TitleInfoText initialInfo>CNPJ</TitleInfoText>
         <ValueInfoText>

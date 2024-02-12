@@ -7,6 +7,7 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RoutesT} from '../../routes/types/RoutesT';
 import {getRealm} from '../../databases/realm';
+import {useSelector} from 'react-redux';
 
 export default function ClientPage() {
   const [search, setSearch] = useState('');
@@ -14,6 +15,7 @@ export default function ClientPage() {
   const route: RouteProp<{params: {updatePage: boolean}}, 'params'> =
     useRoute();
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
+  const clientSelection = useSelector((rootReducer: any) => rootReducer.client);
   const fetchClients = async () => {
     const realm = await getRealm();
 
@@ -38,6 +40,7 @@ export default function ClientPage() {
         input={search}
         clientPage
         route={'ClientDescription'}
+        params={clientSelection.ClientDescriptionInitialState.CNPJ}
       />
       <Button
         title="Novo cliente"

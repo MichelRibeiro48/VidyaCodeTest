@@ -1,4 +1,4 @@
-export interface OrderRegisterData {
+export interface ProductType {
   id: string;
   uriImage: string;
   name: string;

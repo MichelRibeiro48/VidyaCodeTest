@@ -4,4 +4,5 @@ export interface SearchListT {
   clientPage?: boolean;
   orderPage?: boolean;
   route: any;
+  params: any;
 }

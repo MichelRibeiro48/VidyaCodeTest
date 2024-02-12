@@ -62,7 +62,7 @@ export default function ProductsRegisterPage() {
     try {
       realm.write(() => {
         realm.create('Product', {
-          _id: uuid.v4(),
+          id: uuid.v4(),
           name: getValues().name,
           price: getValues().price,
           description: getValues().description,

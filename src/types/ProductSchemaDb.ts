@@ -1,7 +1,7 @@
 export interface ProductSchema {
   name: string;
   properties: {
-    _id: string;
+    id: string;
     name: string;
     price: string;
     description: string;

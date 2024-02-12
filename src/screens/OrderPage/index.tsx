@@ -5,10 +5,13 @@ import Input from '../../components/Input';
 import {MainPage} from './styles';
 import SearchList from '../../components/SearchList';
 import {getRealm} from '../../databases/realm';
+import {useSelector} from 'react-redux';
 
 export default function OrderPage() {
   const [search, setSearch] = useState('');
   const [clients, setClients] = useState({});
+  const client = useSelector((rootReducer: any) => rootReducer.client);
+
   const fetchClients = async () => {
     const realm = await getRealm();
     try {
@@ -20,6 +23,7 @@ export default function OrderPage() {
       realm.close();
     }
   };
+
   useEffect(() => {
     fetchClients();
   }, []);

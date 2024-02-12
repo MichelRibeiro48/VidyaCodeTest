@@ -27,6 +27,7 @@ export default function SearchList({
   clientPage,
   orderPage,
   route,
+  params,
 }: SearchListT) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export default function SearchList({
     district,
     address,
     number,
+    cart,
   }: ClientListButton) => {
     dispatch(
       addClientDescription({
@@ -54,19 +56,21 @@ export default function SearchList({
         district,
         address,
         number,
+        cart: cart,
       }),
     );
   };
+
   return (
     <FlatList
       data={data}
-      keyExtractor={item => item._id}
+      keyExtractor={item => item?.id}
       showsVerticalScrollIndicator={false}
       renderItem={({item, index}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
           <Card
             onPress={() => {
-              navigation.navigate(route);
+              navigation.navigate(route, {item});
               onPressClient({
                 name: item?.name,
                 address: item?.address,
@@ -77,6 +81,7 @@ export default function SearchList({
                 district: item?.district,
                 number: item?.number,
                 state: item?.state,
+                cart: item?.cart || [],
               });
             }}>
             <BoxThumbClient>

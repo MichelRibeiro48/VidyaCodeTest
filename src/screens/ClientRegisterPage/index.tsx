@@ -84,7 +84,7 @@ export default function ClientRegisterPage() {
     try {
       realm.write(() => {
         realm.create('Client', {
-          _id: uuid.v4(),
+          id: uuid.v4(),
           name: getValues().name,
           CNPJ: getValues().CNPJ,
           phone: getValues().phone,

@@ -1,3 +1,8 @@
+import {ProductType} from './product';
+
+interface ProductCart extends ProductType {
+  quantity: number;
+}
 export interface ClientListButton {
   name: string;
   CNPJ: string;
@@ -8,4 +13,5 @@ export interface ClientListButton {
   district: string;
   address: string;
   number: string;
+  cart?: ProductCart[];
 }

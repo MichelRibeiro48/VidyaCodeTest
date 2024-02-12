@@ -3,18 +3,18 @@ import {ObjectSchema} from 'realm';
 export const ProductClientSchema = {
   name: 'ProductClient',
   properties: {
-    _id: 'string',
+    id: 'string',
     name: 'string',
     price: 'string',
     description: 'string',
     uriImage: 'string',
   },
-  primaryKey: '_id',
+  primaryKey: 'id',
 };
 export const ClientSchema: ObjectSchema = {
   name: 'Client',
   properties: {
-    _id: 'string',
+    id: 'string',
     name: 'string',
     CNPJ: 'string',
     phone: 'string',
