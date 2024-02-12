@@ -1,3 +1,3 @@
-import {ClientListButton} from '../../types/ClientListButton';
+import {ClientType} from '../../types/client';
 
-export const ClientDescriptionInitialState = [];
+export const ClientDescriptionInitialState: ClientType[] = [];

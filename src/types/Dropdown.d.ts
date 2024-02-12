@@ -1,4 +1,4 @@
-export interface DropdownT {
+export interface DropdownType {
   states: string[];
   selectedItem: unknown;
   setSelectedItem: (itemValue: unknown) => void;

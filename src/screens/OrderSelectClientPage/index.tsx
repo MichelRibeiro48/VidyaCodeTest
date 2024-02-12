@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {MainPage} from './styles';
-import Input from '../../components/Input';
-import {getRealm} from '../../databases/realm';
+
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+
+import Input from '../../components/Input';
 import SearchList from '../../components/SearchList';
 import Button from '../../components/Button';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
 import Header from '../../components/Header';
+
+import {getRealm} from '../../databases/realm';
+
+import {RoutesT} from '../../routes/types/RoutesT';
+
+import {MainPage} from './styles';
 
 export default function OrderSelectClientPage() {
   const [clients, setClients] = useState([{}]);

@@ -1,4 +1,4 @@
-export interface ButtonT {
+export interface ButtonType {
   title: string;
   onPress: () => void;
   marginTop?: number;

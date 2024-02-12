@@ -1,22 +1,33 @@
 import React, {useEffect, useState} from 'react';
-import {ButtonView, FormView, MainPage} from './styles';
-import Header from '../../components/Header';
+
+import uuid from 'react-native-uuid';
+
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
+
+import {yupResolver} from '@hookform/resolvers/yup';
 import {useForm} from 'react-hook-form';
+
+import {getRealm} from '../../databases/realm';
+
+import {RoutesT} from '../../routes/types/RoutesT';
+
+import {CNPJRegex, cepRegex, phoneRegex} from '../../helpers/Regex';
+
+import Header from '../../components/Header';
 import Button from '../../components/Button';
 import InputForm from '../../components/InputForm';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {ValidationClientSchema} from '../../validations/yup';
-import {getAddressByCep, getUFBrazil} from '../../api';
-import {cepInfoT} from '../../types/cepInfoT';
-import {CNPJRegex, cepRegex, phoneRegex} from '../../helpers/Regex';
-import {ResponseUFBrazilT} from '../../types/ResponseUFBrazilT';
-import {GetAddressResponseT} from '../../types/GetAddressResponseT';
 import Dropdown from '../../components/Dropdown';
-import uuid from 'react-native-uuid';
-import {getRealm} from '../../databases/realm';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
+
+import {GetAddressResponseType} from '../../types/GetAddressResponse';
+import {ResponseUFBrazilType} from '../../types/ResponseUFBrazilT';
+import {cepInfoType} from '../../types/cepInfo';
+
+import {getAddressByCep, getUFBrazil} from '../../api';
+
+import {ValidationClientSchema} from '../../validations/yup';
+
+import {ButtonView, FormView, MainPage} from './styles';
 
 export default function ClientRegisterPage() {
   const [selectedItem, setSelectedItem] = useState<unknown>('');
@@ -24,7 +35,7 @@ export default function ClientRegisterPage() {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const [updatePage, setUpdatePage] = useState(false);
   const [states, setStates] = useState<string[]>([]);
-  const [cepInfo, setCepInfo] = useState<cepInfoT>({
+  const [cepInfo, setCepInfo] = useState<cepInfoType>({
     uf: undefined,
     bairro: undefined,
     localidade: undefined,
@@ -40,7 +51,7 @@ export default function ClientRegisterPage() {
 
   const getAddress = async (cep: string) => {
     try {
-      const response: GetAddressResponseT = await getAddressByCep(cep);
+      const response: GetAddressResponseType = await getAddressByCep(cep);
       setCepInfo(response);
     } catch (e) {
       console.log(e);
@@ -50,7 +61,7 @@ export default function ClientRegisterPage() {
   const getResponseUFBrazil = async () => {
     try {
       const response = await getUFBrazil();
-      response.map((item: ResponseUFBrazilT) =>
+      response.map((item: ResponseUFBrazilType) =>
         setStates(oldStates => [...oldStates, item.nome]),
       );
     } catch (e) {

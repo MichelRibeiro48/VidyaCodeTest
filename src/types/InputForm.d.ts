@@ -1,6 +1,6 @@
 import {Mask} from 'react-native-mask-input';
 
-export interface InputFormT {
+export interface InputFormType {
   control: any;
   name: string;
   placeholder?: string;

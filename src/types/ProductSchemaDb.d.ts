@@ -1,4 +1,4 @@
-export interface ProductSchema {
+export interface ProductSchemaType {
   name: string;
   properties: {
     id: string;

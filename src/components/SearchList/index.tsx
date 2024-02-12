@@ -1,7 +1,21 @@
 import React from 'react';
 
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
 import {FlatList} from 'react-native';
-import {SearchListT} from '../../types/SearchListT';
+
+import {addClientDescription} from '../../redux/client/slice';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {CartType} from '../../types/cart';
+import {RoutesT} from '../../routes/types/RoutesT';
+import {SearchListType} from '../../types/SearchListT';
+import {ClientListButton} from '../../types/ClientListButton';
+
+import {colors} from '../../mock/colors';
+
+import Feather from 'react-native-vector-icons/Feather';
+
 import {
   BoxClientView,
   BoxThumbClient,
@@ -12,14 +26,6 @@ import {
   Thumbnail,
   ThumbnailText,
 } from './styles';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
-import {colors} from '../../mock/colors';
-import {useDispatch, useSelector} from 'react-redux';
-import {ClientListButton} from '../../types/ClientListButton';
-import {addClientDescription} from '../../redux/client/slice';
-import Feather from 'react-native-vector-icons/Feather';
 
 export default function SearchList({
   data,
@@ -27,12 +33,10 @@ export default function SearchList({
   clientPage,
   orderPage,
   route,
-  params,
-}: SearchListT) {
+}: SearchListType) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
   const client = useSelector((rootReducer: any) => rootReducer.client);
-
   const onPressClient = ({
     name,
     CNPJ,
@@ -93,17 +97,28 @@ export default function SearchList({
                 <QtdProductText>
                   {clientPage || orderPage
                     ? item.CNPJ
-                    : `Qtd. produtos: ${item.qtdProduct}`}
+                    : `Qtd. produtos: ${
+                        client.ClientDescriptionInitialState[
+                          index
+                        ]?.cart.reduce(
+                          (total: number, cartItem: CartType) =>
+                            (total += cartItem.quantity),
+                          0,
+                        ) || 0
+                      }`}
                 </QtdProductText>
               </BoxClientView>
             </BoxThumbClient>
             <CurrencyProductText>
               {!clientPage &&
                 !orderPage &&
-                new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(item.total)}{' '}
+                `R$ ${
+                  client.ClientDescriptionInitialState[index]?.cart.reduce(
+                    (total: number, cartItem: CartType) =>
+                      (total += cartItem.totalPrice),
+                    0,
+                  ) || 0
+                }`}
               {orderPage &&
                 item.CNPJ === client.ClientDescriptionInitialState?.CNPJ && (
                   <Feather name="check" size={16} color={'#006FFD'} />

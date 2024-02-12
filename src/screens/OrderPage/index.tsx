@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 
+import {getRealm} from '../../databases/realm';
+
 import Input from '../../components/Input';
+import SearchList from '../../components/SearchList';
 
 import {MainPage} from './styles';
-import SearchList from '../../components/SearchList';
-import {getRealm} from '../../databases/realm';
-import {useSelector} from 'react-redux';
 
 export default function OrderPage() {
   const [search, setSearch] = useState('');
   const [clients, setClients] = useState({});
-  const client = useSelector((rootReducer: any) => rootReducer.client);
 
   const fetchClients = async () => {
     const realm = await getRealm();

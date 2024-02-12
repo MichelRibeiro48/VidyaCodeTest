@@ -1,4 +1,4 @@
-export interface InputT {
+export interface InputType {
   value?: string;
   onChangeText?: (value: string) => void;
   icon?: boolean;

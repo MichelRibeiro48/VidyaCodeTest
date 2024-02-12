@@ -1,5 +1,12 @@
 import React from 'react';
+
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 import {useSelector} from 'react-redux';
+
+import {RoutesT} from '../../routes/types/RoutesT';
+
 import {
   CloseButton,
   CloseIcon,
@@ -10,9 +17,7 @@ import {
   ProductInfoTitleText,
   ProductInfoView,
 } from './styles';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
+
 export default function ProductDetails() {
   const product = useSelector((rootReducer: any) => rootReducer.product);
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
@@ -22,7 +27,13 @@ export default function ProductDetails() {
       <CloseButton onPress={() => navigation.goBack()}>
         <CloseIcon name={'close'} size={48} color={'black'} />
       </CloseButton>
-      <ProductImage source={{uri: product.productDetailedInitialState.image}} />
+      <ProductImage
+        source={
+          product.ProductDetailedInitialState?.image
+            ? {uri: product.productDetailedInitialState.image}
+            : require('../../assets/images/ImageProduct.png')
+        }
+      />
       <ProductInfoView>
         <ProductInfoTitleText>
           {product.productDetailedInitialState.name}

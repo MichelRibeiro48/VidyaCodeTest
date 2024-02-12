@@ -1,10 +1,12 @@
 import React from 'react';
-import {HeaderView, BackButton, HeaderText} from './styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {HeaderT} from '../../types/HeaderT';
 
-export default function Header({title}: HeaderT) {
+import {HeaderType} from '../../types/Header';
+
+import {HeaderView, BackButton, HeaderText} from './styles';
+
+export default function Header({title}: HeaderType) {
   const navigation = useNavigation();
   return (
     <HeaderView>

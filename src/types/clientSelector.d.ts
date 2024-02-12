@@ -1,6 +1,6 @@
 import {ClientDescriptionType} from '../redux/client/initialState';
 
-export interface clientSelector {
+export interface clientSelectorType {
   client: {
     ClientDescriptionInitialState: ClientDescriptionType;
   };

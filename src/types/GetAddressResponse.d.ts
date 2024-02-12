@@ -1,4 +1,4 @@
-export interface GetAddressResponseT {
+export interface GetAddressResponseType {
   bairro: string;
   cep: string;
   complemento: string;

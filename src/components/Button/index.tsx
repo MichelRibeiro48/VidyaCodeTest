@@ -1,7 +1,9 @@
 import React from 'react';
-import {BoxButton, ButtonText} from './styles';
-import {ButtonT} from '../../types/ButtonT';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import {ButtonType} from '../../types/ButtonT';
+
+import {BoxButton, ButtonText} from './styles';
 
 export default function Button({
   title,
@@ -10,7 +12,7 @@ export default function Button({
   size,
   icon,
   marginBottom,
-}: ButtonT) {
+}: ButtonType) {
   return (
     <BoxButton
       onPress={onPress}

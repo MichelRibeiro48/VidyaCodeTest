@@ -1,4 +1,4 @@
-export interface ProductListButton {
+export interface ProductListButtonType {
   name: string;
   price: string;
   description: string;

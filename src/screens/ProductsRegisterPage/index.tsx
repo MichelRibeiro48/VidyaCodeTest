@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
 
+import {useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 import {
   ImageLibraryOptions,
   launchImageLibrary,
@@ -7,16 +13,15 @@ import {
 import {Masks} from 'react-native-mask-input';
 import uuid from 'react-native-uuid';
 
-import {useForm} from 'react-hook-form';
+import {getRealm} from '../../databases/realm';
+
+import {RoutesT} from '../../routes/types/RoutesT';
 
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import InputForm from '../../components/InputForm';
 
-import {yupResolver} from '@hookform/resolvers/yup';
 import {ValidationProductSchema} from '../../validations/yup';
-
-import {getRealm} from '../../databases/realm';
 
 import {
   DottedView,
@@ -26,10 +31,6 @@ import {
   PickerPhotoDescription,
   PickerPhotoTitle,
 } from './styles';
-
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
 
 export default function ProductsRegisterPage() {
   const [focusInput, setFocusInput] = useState('');

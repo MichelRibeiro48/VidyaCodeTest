@@ -1,4 +1,16 @@
 import React from 'react';
+import {FlatList} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+import {useDispatch} from 'react-redux';
+import {addProductDetailed} from '../../redux/product/slice';
+
+import {RoutesT} from '../../routes/types/RoutesT';
+import {ProductListProp} from '../../types/ProductListProp';
+
+import {ProductListButtonType} from '../../types/ProductListOnPress';
+
 import {
   CardProduct,
   ImageProduct,
@@ -6,14 +18,7 @@ import {
   ProductTitle,
   ProductValue,
 } from './styles';
-import {ProductListProp} from '../../types/ProductListProp';
-import {FlatList} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
-import {useDispatch} from 'react-redux';
-import {addProductDetailed} from '../../redux/product/slice';
-import {ProductListButton} from '../../types/ProductListOnPress';
+
 export default function ProductList({data, input, route}: ProductListProp) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
@@ -23,7 +28,7 @@ export default function ProductList({data, input, route}: ProductListProp) {
     price,
     description,
     image,
-  }: ProductListButton) => {
+  }: ProductListButtonType) => {
     dispatch(addProductDetailed({name, price, description, image}));
   };
 

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import OrderRegister from '../../../screens/OrderRegister';
 
 export default function OrderStackRoute() {

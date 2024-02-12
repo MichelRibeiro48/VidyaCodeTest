@@ -1,10 +1,12 @@
 import React from 'react';
-import {ErrorText, PickerBox, PickerInput, StateText} from './styles';
-import {Picker} from '@react-native-picker/picker';
-import {DropdownT} from '../../types/DropdownT';
 import {Controller} from 'react-hook-form';
+import {Picker} from '@react-native-picker/picker';
 
-export default function Dropdown({states, control, name, error}: DropdownT) {
+import {DropdownType} from '../../types/Dropdown';
+
+import {ErrorText, PickerBox, PickerInput, StateText} from './styles';
+
+export default function Dropdown({states, control, name, error}: DropdownType) {
   return (
     <>
       <StateText>Estado</StateText>

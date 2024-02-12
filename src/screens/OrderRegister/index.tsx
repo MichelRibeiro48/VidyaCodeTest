@@ -1,4 +1,30 @@
 import React, {useEffect, useState} from 'react';
+
+import {FlatList} from 'react-native';
+import Feather from 'react-native-vector-icons/FontAwesome5';
+
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+import {getRealm} from '../../databases/realm';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  addProductInSlice,
+  decreaseProductQuantity,
+} from '../../redux/client/slice';
+
+import {RoutesT} from '../../routes/types/RoutesT';
+
+import Header from '../../components/Header';
+import Button from '../../components/Button';
+
+import {OrderRegisterData} from '../../types/OrderRegisterData';
+import {ClientType} from '../../types/client';
+import {decrementQuantityProps} from '../../types/decrementQuantityProps';
+import {ProductPropsType} from '../../types/productProps';
+import {IncrementProductQuantityType} from '../../types/incrementQuantityProps';
+
 import {
   ButtonMinus,
   ButtonPlus,
@@ -26,36 +52,20 @@ import {
   TotalInfoBox,
   TotalInfoView,
 } from './styles';
-import Header from '../../components/Header';
-import Feather from 'react-native-vector-icons/FontAwesome5';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RoutesT} from '../../routes/types/RoutesT';
-import {useDispatch, useSelector} from 'react-redux';
-import {getRealm} from '../../databases/realm';
-import {FlatList} from 'react-native';
-import Button from '../../components/Button';
-import {ProductQtd} from '../../types/ProductQtd';
-import {OrderRegisterData} from '../../types/OrderRegisterData';
-import {
-  addProductInSlice,
-  decreaseProductQuantity,
-} from '../../redux/client/slice';
 
 export default function OrderRegister() {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
   const client = useSelector((rootReducer: any) => rootReducer.client);
-  const cart = useSelector((rootReducer: any) => rootReducer.cart);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [updatePage, setUpdatePage] = useState(false);
   const route: RouteProp<{params: {item: any}}, 'params'> = useRoute();
 
-  const newClient = client.ClientDescriptionInitialState.filter(
-    client => client.CNPJ === route.params.item.CNPJ,
+  const newClient: ClientType[] = client.ClientDescriptionInitialState.filter(
+    (selectedClient: ClientType) =>
+      selectedClient.CNPJ === route.params.item.CNPJ,
   );
 
-  console.log(client.ClientDescriptionInitialState.cart);
-
-  const [productQtd, setProductQtd] = useState<ProductQtd[]>([]);
   const [products, setProducts] = useState<OrderRegisterData[]>([]);
 
   const fetchProducts = async () => {
@@ -69,11 +79,24 @@ export default function OrderRegister() {
       realm.close();
     }
   };
-  const handleIncrementQuantity = ({product, newClient}) => {
-    dispatch(addProductInSlice({product, newClient}));
+
+  const getTotalPrice = ({product}: ProductPropsType) => {
+    const currency = Number(product.price.replace('R$ ', '').replace(',', '.'));
+    setTotalPrice(totalPrice + currency);
   };
-  const handleDecrementQuantity = productId => {
-    dispatch(decreaseProductQuantity({productId}));
+
+  const handleIncrementQuantity = ({
+    product,
+    newClientProp,
+    totalPriceProp,
+  }: IncrementProductQuantityType) => {
+    dispatch(addProductInSlice({product, newClientProp, totalPriceProp}));
+  };
+  const handleDecrementQuantity = ({
+    product,
+    newClientProp,
+  }: decrementQuantityProps) => {
+    dispatch(decreaseProductQuantity({product, newClientProp}));
   };
 
   useEffect(() => {
@@ -119,16 +142,28 @@ export default function OrderRegister() {
                 </CardInfoBox>
                 <CardButtonBox>
                   <ButtonMinus
-                    onPress={() => handleDecrementQuantity(item?.id)}>
+                    onPress={() => {
+                      handleDecrementQuantity({
+                        product: item,
+                        newClientProp: newClient,
+                      });
+                    }}>
                     <Icon name="minus" size={10} color={'#006FFD'} />
                   </ButtonMinus>
                   <NumberQtdProductText>
                     {newClient[0].cart[index]?.quantity || 0}
                   </NumberQtdProductText>
                   <ButtonPlus
-                    onPress={() =>
-                      handleIncrementQuantity({product: item, newClient})
-                    }>
+                    onPress={() => {
+                      handleIncrementQuantity({
+                        product: item,
+                        newClientProp: newClient,
+                        totalPriceProp: item.price,
+                      });
+                      getTotalPrice({
+                        product: item,
+                      });
+                    }}>
                     <Icon name="plus" size={10} color={'#006FFD'} />
                   </ButtonPlus>
                   <ProductPriceText>{item?.price}</ProductPriceText>
@@ -142,12 +177,18 @@ export default function OrderRegister() {
       <TotalInfoBox>
         <TotalInfoView>
           <ProductTotalText>Total</ProductTotalText>
-          <ProductTotalPriceText>R$ 0</ProductTotalPriceText>
+          <ProductTotalPriceText>{`R$ ${newClient[0].cart.reduce(
+            (total, product) => total + product.totalPrice,
+            0,
+          )}`}</ProductTotalPriceText>
         </TotalInfoView>
       </TotalInfoBox>
       <Button
         title="Salvar"
-        onPress={() => console.log('teste')}
+        onPress={() => {
+          setUpdatePage(!updatePage);
+          navigation.navigate('Pedidos', {updatePage});
+        }}
         size="large"
         marginBottom={24}
       />

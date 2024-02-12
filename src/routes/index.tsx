@@ -1,10 +1,10 @@
 import React from 'react';
-
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import TabRoutes from './TabRoutes';
+
 import OrderRegister from '../screens/OrderRegister';
-import {NavigationContainer} from '@react-navigation/native';
 import ClientDescriptionPage from '../screens/ClientDescriptionPage';
 import ClientRegisterPage from '../screens/ClientRegisterPage';
 import OrderSelectClientPage from '../screens/OrderSelectClientPage';

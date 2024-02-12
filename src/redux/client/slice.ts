@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+
 import {ClientDescriptionInitialState} from './initialState';
 
 export const clientDescriptionSlice = createSlice({
@@ -24,8 +25,9 @@ export const clientDescriptionSlice = createSlice({
       ];
     },
     addProductInSlice(state, action) {
+      console.log(state.ClientDescriptionInitialState);
       const selectedClient = state.ClientDescriptionInitialState.filter(
-        client => client.CNPJ === action.payload.newClient[0].CNPJ,
+        client => client.CNPJ === action.payload.newClientProp[0].CNPJ,
       );
 
       const productAlreadyInCart = selectedClient[0].cart.some(
@@ -35,7 +37,13 @@ export const clientDescriptionSlice = createSlice({
       if (productAlreadyInCart) {
         selectedClient[0].cart = selectedClient[0].cart.map(cart =>
           cart.id === action.payload.product.id
-            ? {...cart, quantity: cart.quantity + 1}
+            ? {
+                ...cart,
+                quantity: cart.quantity + 1,
+                totalPrice:
+                  cart.totalPrice +
+                  Number(cart.price.replace('R$ ', '').replace(',', '.')),
+              }
             : cart,
         );
 
@@ -44,16 +52,38 @@ export const clientDescriptionSlice = createSlice({
 
       selectedClient[0].cart = [
         ...selectedClient[0].cart,
-        {...action.payload.product, quantity: 1},
+        {
+          ...action.payload.product,
+          quantity: 1,
+          totalPrice: Number(
+            action.payload.totalPriceProp.replace('R$ ', '').replace(',', '.'),
+          ),
+        },
       ];
     },
     decreaseProductQuantity(state, action) {
-      state.ClientDescriptionInitialState.cart =
-        state.ClientDescriptionInitialState.cart.map(cart =>
-          cart.id === action.payload
-            ? {...cart, quantity: cart.quantity - 1}
+      const selectedClient = state.ClientDescriptionInitialState.filter(
+        client => client.CNPJ === action.payload.newClientProp[0].CNPJ,
+      );
+
+      const productAlreadyInCart = selectedClient[0].cart.some(
+        product => product.id === action.payload.product.id,
+      );
+
+      if (productAlreadyInCart) {
+        selectedClient[0].cart = selectedClient[0].cart.map(cart =>
+          cart.id === action.payload.product.id
+            ? {...cart, quantity: cart.quantity > 0 && cart.quantity - 1}
             : cart,
         );
+
+        return;
+      }
+
+      selectedClient[0].cart = [
+        ...selectedClient[0].cart,
+        {...action.payload.product, quantity: 1, totalPrice: 0},
+      ];
     },
   },
 });

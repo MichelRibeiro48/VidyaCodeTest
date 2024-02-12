@@ -2,7 +2,7 @@ import {Picker} from '@react-native-picker/picker';
 import styled from 'styled-components/native';
 
 export const PickerInput = styled(Picker)`
-  height: 48px;
+  height: 50px;
   font-family: 'Inter-Regular';
 `;
 

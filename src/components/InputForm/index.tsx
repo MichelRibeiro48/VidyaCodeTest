@@ -1,8 +1,9 @@
 import React from 'react';
+import {Controller} from 'react-hook-form';
+
+import {InputFormType} from '../../types/InputForm';
 
 import {BoxInput, ErrorText, InputArea, TitleBoxText} from './styles';
-import {Controller} from 'react-hook-form';
-import {InputFormT} from '../../types/InputFormT';
 
 export default function InputForm({
   control,
@@ -14,7 +15,7 @@ export default function InputForm({
   isDescription,
   onPressOut,
   mask,
-}: InputFormT) {
+}: InputFormType) {
   return (
     <>
       <TitleBoxText>{placeholder}</TitleBoxText>

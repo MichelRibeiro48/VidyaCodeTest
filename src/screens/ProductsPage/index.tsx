@@ -1,13 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import Button from '../../components/Button';
+
+import {ActivityIndicator} from 'react-native';
+
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
-import {RoutesT} from '../../routes/types/RoutesT';
+
 import {getRealm} from '../../databases/realm';
-import {MainPage} from './styles';
+
+import {RoutesT} from '../../routes/types/RoutesT';
+
 import ProductList from '../../components/ProductList';
 import Input from '../../components/Input';
-import {ActivityIndicator} from 'react-native';
+import Button from '../../components/Button';
+
+import {MainPage} from './styles';
 
 export default function ProductsPage() {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();

@@ -4,9 +4,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+
 import OrderPage from '../../screens/OrderPage';
 import ClientPage from '../../screens/ClientPage';
 import ProductsPage from '../../screens/ProductsPage';
+
 export default function TabRoutes() {
   const Tab = createBottomTabNavigator();
   return (
