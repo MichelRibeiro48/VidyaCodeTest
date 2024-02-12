@@ -129,7 +129,7 @@ export default function ProductsRegisterPage() {
       <Button
         title="Salvar"
         onPress={handleSubmit(handleNewProductRegister)}
-        marginTop={200}
+        marginTop={48}
         size="large"
       />
     </MainPage>

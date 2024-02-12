@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
 
-export const MainPage = styled.View`
+export const MainPage = styled.ScrollView`
   flex: 1;
   background-color: white;
-  padding: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 24px;
 `;
 
 export const DottedView = styled.View`

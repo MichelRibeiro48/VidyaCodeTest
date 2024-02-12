@@ -31,6 +31,7 @@ export default function SearchList({
   clientPage,
   orderPage,
   route,
+  refreshControl,
 }: SearchListType) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ export default function SearchList({
     <FlatList
       data={data}
       keyExtractor={item => item?.CNPJ}
+      refreshControl={refreshControl}
       showsVerticalScrollIndicator={false}
       renderItem={({item, index}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (

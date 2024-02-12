@@ -3,8 +3,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export const MainPage = styled.View`
   padding-top: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
   background-color: white;
   flex: 1;
 `;

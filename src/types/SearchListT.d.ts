@@ -4,4 +4,5 @@ export interface SearchListType {
   clientPage?: boolean;
   orderPage?: boolean;
   route: any;
+  refreshControl?: () => void;
 }

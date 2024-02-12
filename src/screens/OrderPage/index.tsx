@@ -35,6 +35,7 @@ export default function OrderPage() {
         route={'OrderRegister'}
         clientPage={false}
         orderPage={false}
+        refreshControl={() => fetchClients}
       />
     </MainPage>
   );
