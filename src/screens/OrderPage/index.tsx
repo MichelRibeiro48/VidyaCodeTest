@@ -10,8 +10,10 @@ import {MainPage} from './styles';
 export default function OrderPage() {
   const [search, setSearch] = useState('');
   const [clients, setClients] = useState({});
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchClients = async () => {
+    setRefreshing(true);
     const realm = await getRealm();
     try {
       const responseClient = realm.objects('Client').toJSON();
@@ -20,6 +22,7 @@ export default function OrderPage() {
       console.log(e);
     } finally {
       realm.close();
+      setRefreshing(false);
     }
   };
 
@@ -35,7 +38,8 @@ export default function OrderPage() {
         route={'OrderRegister'}
         clientPage={false}
         orderPage={false}
-        refreshControl={() => fetchClients}
+        onRefresh={fetchClients}
+        refreshing={refreshing}
       />
     </MainPage>
   );

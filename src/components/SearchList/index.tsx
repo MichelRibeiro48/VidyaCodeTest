@@ -2,7 +2,7 @@ import React from 'react';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
-import {FlatList} from 'react-native';
+import {FlatList, RefreshControl} from 'react-native';
 
 import {addClientDescription} from '../../redux/client/slice';
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,7 +31,8 @@ export default function SearchList({
   clientPage,
   orderPage,
   route,
-  refreshControl,
+  onRefresh,
+  refreshing,
 }: SearchListType) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
@@ -67,7 +68,9 @@ export default function SearchList({
     <FlatList
       data={data}
       keyExtractor={item => item?.CNPJ}
-      refreshControl={refreshControl}
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+      }
       showsVerticalScrollIndicator={false}
       renderItem={({item, index}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (
