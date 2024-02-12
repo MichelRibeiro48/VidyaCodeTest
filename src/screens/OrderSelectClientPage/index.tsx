@@ -47,12 +47,6 @@ export default function OrderSelectClientPage() {
         orderPage
         route={'OrderRegister'}
       />
-      <Button
-        title="Salvar"
-        onPress={() => navigation.navigate('OrderRegister')}
-        size="large"
-        marginBottom={25}
-      />
     </MainPage>
   );
 }
