@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, RefreshControl} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -19,7 +19,13 @@ import {
   ProductValue,
 } from './styles';
 
-export default function ProductList({data, input, route}: ProductListProp) {
+export default function ProductList({
+  data,
+  input,
+  route,
+  onRefresh,
+  refreshing,
+}: ProductListProp) {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
   const dispatch = useDispatch();
 
@@ -37,6 +43,9 @@ export default function ProductList({data, input, route}: ProductListProp) {
       data={data}
       numColumns={2}
       showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       keyExtractor={item => item.id}
       renderItem={({item}) =>
         item.name?.toLowerCase().includes(input.toLowerCase()) && (

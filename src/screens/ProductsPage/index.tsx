@@ -25,10 +25,10 @@ export default function ProductsPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchProducts = async () => {
+    setIsLoading(true);
     const realm = await getRealm();
 
     try {
-      setIsLoading(true);
       const response = realm.objects('Product').toJSON();
       setProducts(response);
     } catch (e) {
@@ -57,6 +57,8 @@ export default function ProductsPage() {
           data={products}
           input={searchProduct}
           route={'ProductDetails'}
+          onRefresh={fetchProducts}
+          refreshing={isLoading}
         />
       )}
       <Button
