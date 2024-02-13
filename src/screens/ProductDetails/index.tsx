@@ -29,7 +29,7 @@ export default function ProductDetails() {
       </CloseButton>
       <ProductImage
         source={
-          product.ProductDetailedInitialState?.image
+          product.productDetailedInitialState.image
             ? {uri: product.productDetailedInitialState.image}
             : require('../../assets/images/ImageProduct.png')
         }
