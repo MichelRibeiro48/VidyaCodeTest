@@ -5,4 +5,5 @@ export interface DropdownType {
   control: any;
   name: string;
   error: string | undefined;
+  fieldTitle: string;
 }

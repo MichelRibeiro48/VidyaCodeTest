@@ -30,9 +30,10 @@ import {ValidationClientSchema} from '../../validations/yup';
 import {ButtonView, FormView, MainPage} from './styles';
 
 export default function ClientRegisterPage() {
-  const [selectedItem, setSelectedItem] = useState<unknown>('');
-  const [focusInput, setFocusInput] = useState('');
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
+
+  const [selectedItem, setSelectedItem] = useState<unknown>();
+  const [focusInput, setFocusInput] = useState('');
   const [updatePage, setUpdatePage] = useState(false);
   const [states, setStates] = useState<string[]>([]);
   const [cepInfo, setCepInfo] = useState<cepInfoType>({
@@ -160,10 +161,13 @@ export default function ClientRegisterPage() {
         <Dropdown
           states={states}
           selectedItem={selectedItem}
-          setSelectedItem={setSelectedItem}
+          setSelectedItem={selectedItemValue =>
+            setSelectedItem(selectedItemValue)
+          }
           control={control}
           name="state"
           error={errors.state?.message}
+          fieldTitle="Estado"
         />
         <InputForm
           control={control}

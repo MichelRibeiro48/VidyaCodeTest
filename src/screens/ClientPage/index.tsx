@@ -16,6 +16,7 @@ import {MainPage} from './styles';
 export default function ClientPage() {
   const [search, setSearch] = useState('');
   const [clients, setClients] = useState([{}]);
+  const [refreshing, setRefreshing] = useState(false);
   const route: RouteProp<{params: {updatePage: boolean}}, 'params'> =
     useRoute();
   const navigation = useNavigation<NativeStackNavigationProp<RoutesT>>();
@@ -23,12 +24,14 @@ export default function ClientPage() {
     const realm = await getRealm();
 
     try {
+      setRefreshing(true);
       const response = realm.objects('Client').toJSON();
       setClients(response);
     } catch (e) {
       console.log(e);
     } finally {
       realm.close();
+      setRefreshing(false);
     }
   };
   useEffect(() => {
@@ -43,6 +46,8 @@ export default function ClientPage() {
         input={search}
         clientPage
         route={'ClientDescription'}
+        refreshing={refreshing}
+        onRefresh={fetchClients}
       />
       <Button
         title="Novo cliente"
