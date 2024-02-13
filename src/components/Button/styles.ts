@@ -6,7 +6,7 @@ export const BoxButton = styled.TouchableOpacity<{
   marginBottom?: number;
 }>`
   flex-direction: row;
-  width: ${props => (props.size === 'small' ? 183 : 375)}px;
+  width: ${props => (props.size === 'small' ? 50 : 100)}%;
   height: ${props => (props.size === 'small' ? 29 : 48)}px;
   border-radius: 12px;
   background-color: #006ffd;
